@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>キャラクター選択</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .character {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>キャラクター選択</h1>
+    <p>カテゴリーを選択してください：</p>
+    <select id="categorySelect">
+        <option value="all">全てのカテゴリー</option>
+        <option value="スカミッシャー">スカミッシャー</option>
+        <option value="コントローラー">コントローラー</option>
+        <option value="アサルト">アサルト</option>
+        <option value="リコン">リコン</option>
+        <option value="サポート">サポート</option>
+        <!-- カテゴリーを追加する場合はここに<option>を追加してください -->
+    </select>
+    <button onclick="selectCharacters()">ランダム選択</button>
+    <div id="result"></div>
+
+    <script>
+        const characters = [
+            { name: "ブラッドハウンド", category: "リコン" },
+            { name: "ジブラルタル", category: "サポート" },
+            { name: "ライフライン", category: "サポート" },
+            { name: "パスファインダー", category: "スカミッシャー" },
+            { name: "レイス", category: "スカミッシャー" },
+            { name: "バンガロール", category: "アサルト" },
+            { name: "コースティック", category: "コントローラー" },
+            { name: "ミラージュ", category: "サポート" },
+            { name: "オクタン", category: "スカミッシャー" },
+            { name: "ワットソン", category: "コントローラー" },
+            { name: "クリプト", category: "リコン" },
+            { name: "レヴナント", category: "アサルト" },
+            { name: "ローバ", category: "サポート" },
+            { name: "ランパート", category: "コントローラー" },
+            { name: "ホライゾン", category: "スカミッシャー" },
+            { name: "ヒューズ", category: "アサルト" },
+            { name: "ヴァルキリー", category: "スカミッシャー" },
+            { name: "シア", category: "リコン" },
+            { name: "アッシュ", category: "アサルト" },
+            { name: "マッドマギー", category: "アサルト" },
+            { name: "ニューキャッスル", category: "サポート" },
+            { name: "ヴァンテージ", category: "リコン" },
+            { name: "カタリスト", category: "コントローラー" },
+            { name: "バリスティック", category: "アサルト" },
+            // キャラクターを追加する場合はここにオブジェクトを追加してください
+        ];
+
+        function selectCharacters() {
+            const categorySelect = document.getElementById("categorySelect");
+            const selectedCategory = categorySelect.value;
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = ""; // 結果をリセット
+
+            const selectedCharacters = getRandomCharacters(selectedCategory);
+            for (let character of selectedCharacters) {
+                const characterDiv = document.createElement("div");
+                characterDiv.className = "character";
+                characterDiv.textContent = character.name;
+                resultDiv.appendChild(characterDiv);
+            }
+        }
+
+        function getRandomCharacters(selectedCategory) {
+            let filteredCharacters = characters;
+            if (selectedCategory !== "all") {
+                filteredCharacters = characters.filter(character => character.category === selectedCategory);
+            }
+
+            const shuffledCharacters = filteredCharacters.sort(() => 0.5 - Math.random());
+            return shuffledCharacters.slice(0, 3);
+        }
+    </script>
+</body>
+</html>
