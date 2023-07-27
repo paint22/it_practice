@@ -4,8 +4,31 @@
     <meta charset="UTF-8">
     <title>簡単なWebページ</title>
 
-
     <style>
+        header {
+    /* 画像のパスを指定 */
+    background-image: url('C:\\Users\\kudosyo\\Desktop\\プロジェクト1\\空.jpg');
+    /* 画像をヘッダー全体に広げる */
+    background-size: 100% 100%;
+    /* 画像を中央に配置 */
+    background-position: center;
+    /* 画像が読み込まれる前の背景色 */
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+header img {
+            position: absolute; /* 画像を絶対的な位置に配置 */
+            top: 10; /* 上端に配置 */
+            left: 50%; /* 左右中央に配置 */
+            transform: translateX(-50%); /* 画像の幅の半分だけ左にずらす */
+            width: 650px;
+            height: 100px;
+        }
+        
+
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -15,13 +38,13 @@
 
         header {
             background-color: #333;
-            color: #fff;
+            color: #000000;
             padding: 10px;
             text-align: center;
         }
 
         nav {
-            background-color: #444;
+            background-color: #00bd9d;
             padding: 5px;
         }
 
@@ -34,15 +57,16 @@
         }
 
         nav li {
-            margin-right: 20px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.2s;
+    margin-right: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    border: 1px solid #ccc; /* 区切りの枠を追加 */
         }
 
         nav li:hover {
-            background-color: red;
-            transform: translateY(-5px);
+    background-color: red;
+    transform: translateY(-5px);
         }
 
         nav li:last-child {
@@ -81,6 +105,7 @@
             padding: 10px;
         }
     </style>
+    
 
 
      <script>
@@ -117,6 +142,7 @@
 <body>
     <header>
         <h1>ぺ</h1>
+        
     </header>
 
     <nav>
@@ -143,5 +169,6 @@
     <footer>
         <p>© 2023 ぺintのきまぐれ</p>
     </footer>
+    <p><a href="https://www.convenience.com">外部のウェブサイトにリンクする</a></p>
 </body>
 </html>
