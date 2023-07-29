@@ -2,124 +2,188 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>簡単なWebページ</title>
-
-
+    <title>名前と武器の割り当て</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
             text-align: center;
         }
-
-        nav {
-            background-color: #444;
-            padding: 5px;
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav li {
-            margin-right: 20px;
-            padding: 5px 10px;
+        .result-container {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            border: 2px solid #ccc;
             border-radius: 5px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        nav li:hover {
-            background-color: red;
-            transform: translateY(-5px);
-        }
-
-        nav li:last-child {
-            margin-right: 0;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        section {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 36px;
-        }
-
-        h2 {
-            font-size: 24px;
-            color: #444;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
+            width: 400px;
+            text-align: left;
         }
     </style>
-
-
-     <script>
-        // JavaScriptのコード
-        document.addEventListener("DOMContentLoaded", function() {
-            // ホームリンクを取得
-            const homeLink = document.querySelector("nav li:first-child a");
-            // Aboutリンクを取得
-            const aboutLink = document.querySelector("nav li:nth-child(2) a");
-             // 問い合わせリンクを取得
-             const 問い合わせLink = document.querySelector("nav li:nth-child(3) a");
-
-            // ホームリンクをクリックしたときの処理
-            homeLink.addEventListener("click", function(event) {
-                event.preventDefault(); // デフォルトのリンク動作をキャンセル
-                window.location.href = "APEX.html"; // APEX.htmlに遷移
-            });
-
-            // Aboutリンクをクリックしたときの処理
-            aboutLink.addEventListener("click", function(event) {
-                event.preventDefault(); // デフォルトのリンク動作をキャンセル
-                window.location.href = "スプラ.html"; // スプラ.htmlに遷移
-            });
-             // 問い合わせリンクをクリックしたときの処理
-             問い合わせLink.addEventListener("click", function(event) {
-                event.preventDefault(); // デフォルトのリンク動作をキャンセル
-                window.location.href = "問い合わせ.html"; // 問い合わせ.htmlに遷移
-            });
-        });
-    </script>
-
-
 </head>
 <body>
-    <header>
-        <h1>作成途中</h1>
-    </header>
+    <h1>名前と武器の割り当て</h1>
+    <p>名前を入力してください（最大10人、改行で区切ってください）：</p>
+    <textarea id="nameInput" rows="4" placeholder="名前1&#10;名前2&#10;名前3&#10;..."></textarea>
+    <br>
+    <p>カテゴリーを選択してください：</p>
+    <select id="categorySelect">
+        <option value="all">全てのカテゴリー</option>
+        <option value="シューター">シューター</option>
+        <option value="チャージャー">チャージャー</option>
+        <option value="ローラー">ローラー</option>
+        <option value="ブラスター">ブラスター</option>
+        <option value="フデ">フデ</option>
+        <option value="スロッシャー">スロッシャー</option>
+        <option value="スピナー">スピナー</option>
+        <option value="マニューバー">マニューバー</option>
+        <option value="シェルタ">シェルタ</option>
+        <option value="ワイパー">ワイパー</option>
+        <option value="ストリンガー">ストリンガー</option>
+        <!-- カテゴリーを追加する場合はここに<option>を追加してください -->
+    </select>
+    <br>
+    <button onclick="randomAssignWeapons()">ランダムに割り当て</button>
+    <br>
+    <div id="result" class="result-container"></div>
+    <script>
+        const weapons = [
+            { name: "わかばシューター", category: "シューター" },
+            { name: "スプラシューター", category: "シューター" },
+            { name: "プロモデラーMG", category: "シューター" },
+            { name: "N-ZAP85", category: "シューター" },
+            { name: "もみじシューター", category: "シューター" },
+            { name: "プライムシューター", category: "シューター" },
+            { name: "ボールドマーカー", category: "シューター" },
+            { name: "スプラシューターコラボ", category: "シューター" },
+            { name: "N-ZAP89", category: "シューター" },
+            { name: "52ガロン", category: "シューター" },
+            { name: "スペースシューターコラボ", category: "シューター" },
+            { name: "ボールドマーカーネオ", category: "シューター" },
+            { name: "L3リールガン", category: "シューター" },
+            { name: "ジェットスイーパー", category: "シューター" },
+            { name: "シャープマーカー", category: "シューター" },
+            { name: "96ガロン", category: "シューター" },
+            { name: "プロモデラーRG", category: "シューター" },
+            { name: "ボトルガイザー", category: "シューター" },
+            { name: "L3リールガンD", category: "シューター" },
+            { name: "プライムシューターコラボ", category: "シューター" },
+            { name: "ジェットスイーパーカスタム", category: "シューター" },
+            { name: "シャープマーカーネオ", category: "シューター" },
+            { name: "96ガロンデコ", category: "シューター" },
+            { name: "H3リールガン", category: "シューター" },
+            { name: "H3リールガンD", category: "シューター" },
+            { name: "スプラチャージャー", category: "チャージャー" },
+            { name: "スクイックリンα", category: "チャージャー" },
+            { name: "スプラチャージャーコラボ", category: "チャージャー" },
+            { name: "スプラスコープ", category: "チャージャー" },
+            { name: "R-PEN/5H", category: "チャージャー" },
+            { name: "スプラスコープコラボ", category: "チャージャー" },
+            { name: "リッター4K", category: "チャージャー" },
+            { name: "14式竹筒銃・甲", category: "チャージャー" },
+            { name: "ソイチューバー", category: "チャージャー" },
+            { name: "4Kスコープ", category: "チャージャー" },
+            { name: "ホットブラスター", category: "ブラスター" },
+            { name: "ラピッドブラスター", category: "ブラスター" },
+            { name: "ラピッドブラスターデコ", category: "ブラスター"},
+            { name: "ロングブラスター", category: "ブラスター" },
+            { name: "ノヴァブラスター", category: "ブラスター" },
+            { name: "S-BLAST92", category: "ブラスター" },
+            { name: "ノヴァブラスターネオ", category: "ブラスター" },
+            { name: "クラッシュブラスター", category: "ブラスター" },
+            { name: "クラッシュブラスターネオ", category: "ブラスター" },
+            { name: "Rブラスターエリート", category: "ブラスター" },
+            { name: "Rブラスターエリートデコ", category: "ブラスター" },
+            { name: "スプラローラー", category: "ローラー" },
+            { name: "カーボンローラー", category: "ローラー" },
+            { name: "スプラローラーコラボ", category: "ローラー" },
+            { name: "ダイナモローラー", category: "ローラー" },
+            { name: "ワイドローラー", category: "ローラー" },
+            { name: "ワイドローラーコラボ", category: "ローラー" },
+            { name: "カーボンローラーデコ", category: "ローラー" },
+            { name: "ヴァリアブルローラー", category: "ローラー" },
+            { name: "ホクサイ", category: "フデ" },
+            { name: "パブロ", category: "フデ" },
+            { name: "フィンセント", category: "フデ" },
+            { name: "パブロ・ヒュー", category: "フデ" },
+            { name: "バケットスロッシャー", category: "スロッシャー" },
+            { name: "ヒッセン", category: "スロッシャー" },
+            { name: "バケットスロッシャーデコ", category: "スロッシャー" },
+            { name: "スクリュースロッシャー", category: "スロッシャー" },
+            { name: "ヒッセン・ヒュー", category: "スロッシャー" },
+            { name: "オーバーフロッシャー", category: "スロッシャー" },
+            { name: "エクスプロッシャー", category: "スロッシャー" },
+            { name: "バレルスピナー", category: "スピナー" },
+            { name: "スプラスピナー", category: "スピナー" },
+            { name: "バレルスピナーデコ", category: "スピナー" },
+            { name: "ハイドラント", category: "スピナー" },
+            { name: "スプラスピナーコラボ", category: "スピナー" },
+            { name: "ノーチラス47", category: "スピナー" },
+            { name: "クーゲルシュライバー", category: "スピナー"},
+            { name: "スプラマニューバー", category: "マニューバー" },
+            { name: "デュアルスイーパー", category: "マニューバー" },
+            { name: "スパッタリー", category: "マニューバー" },
+            { name: "デュアルスイーパーカスタム", category: "マニューバー" },
+            { name: "クアッドホッパーブラック", category: "マニューバー" },
+            { name: "ケルビン525", category: "マニューバー" },
+            { name: "クアッドホッパーホワイト", category: "マニューバー" },
+            { name: "スパッタリー・ヒュー", category: "マニューバー" },
+            { name: "パラシェルター", category: "シェルタ" },
+            { name: "キャンピングシェルター", category: "シェルタ" },
+            { name: "スパイガジェット", category: "シェルタ" },
+            { name: "キャンピングシェルターソレーラ", category: "シェルタ" },
+            { name: "ドライブワイパー", category: "ワイパー" },
+            { name: "ドライブワイパーデコ", category: "ワイパー" },
+            { name: "ジムワイパー", category: "ワイパー" },
+            { name: "トライストリンガー", category: "ストリンガー" },
+            { name: "LACT450", category: "ストリンガー" },
+           
 
-    
+
+
+
+            // 武器データを追加する場合はここにオブジェクトを追加してください
+    ];
+            function getRandomWeapon(selectedCategory) {
+        let filteredWeapons = weapons;
+        if (selectedCategory !== "all") {
+            filteredWeapons = weapons.filter(weapon => weapon.category === selectedCategory);
+        }
+        return filteredWeapons[Math.floor(Math.random() * filteredWeapons.length)];
+    }
+            function randomAssignWeapons() {
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = ""; // 結果をリセット
+
+            const nameInput = document.getElementById("nameInput");
+            const names = nameInput.value.trim().split(/\r?\n/);
+
+            const selectedCategory = document.getElementById("categorySelect").value;
+            const assignedWeapons = [];
+
+            for (let i = 0; i < 10; i++) {
+                const name = names[i] ? names[i].trim() : ""; // 名前が入力されているか確認
+                const weapon = getRandomWeapon(selectedCategory);
+                assignedWeapons.push({ name, weapon });
+            }
+
+            const charactersDiv = document.createElement("div");
+            charactersDiv.className = "characters";
+
+            for (const { name, weapon } of assignedWeapons) {
+                if (name !== "") {
+                    const resultMessage = `${name}さん：「${weapon.name}」`;
+                    const characterDiv = document.createElement("div");
+                    characterDiv.className = "character";
+                    characterDiv.textContent = resultMessage;
+                    charactersDiv.appendChild(characterDiv);
+                }
+            }
+
+            // 結果を表示する前に、resultDivにcharactersDivを追加する
+            resultDiv.appendChild(charactersDiv);
+        }
+    </script>
+</body>
+</html>
 
     <footer>
         <p>© 2023 ぺintの気まぐれ</p>
