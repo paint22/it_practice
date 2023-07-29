@@ -20,6 +20,10 @@
 </head>
 <body>
     <h1>キャラクター選択</h1>
+    <p>3人の名前を入力してください：</p>
+    <input type="text" id="name1" placeholder="名前1">
+    <input type="text" id="name2" placeholder="名前2">
+    <input type="text" id="name3" placeholder="名前3">
     <p>カテゴリーを選択してください：</p>
     <select id="categorySelect">
         <option value="all">全てのカテゴリー</option>
@@ -32,8 +36,15 @@
     </select>
     <button onclick="selectCharacters()">ランダム選択</button>
     <div id="result"></div>
+    <p>Discordの場所（チャンネル）のトークンを入力してください：</p>
+    <input type="text" id="discordToken" placeholder="トークン">
+    
+
+    <button onclick="selectCharacters()">送信</button>
+    <div id="result"></div>
 
     <script>
+        const DISCORD_BOT_TOKEN = 'BOT_TOKEN_PLACEHOLDER'; // Discordのボットトークンを入力してください
         const characters = [
             { name: "ブラッドハウンド", category: "リコン" },
             { name: "ジブラルタル", category: "サポート" },
@@ -63,18 +74,19 @@
         ];
 
         function selectCharacters() {
+            const name1 = document.getElementById("name1").value;
+            const name2 = document.getElementById("name2").value;
+            const name3 = document.getElementById("name3").value;
+
             const categorySelect = document.getElementById("categorySelect");
             const selectedCategory = categorySelect.value;
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML = ""; // 結果をリセット
 
             const selectedCharacters = getRandomCharacters(selectedCategory);
-            for (let character of selectedCharacters) {
-                const characterDiv = document.createElement("div");
-                characterDiv.className = "character";
-                characterDiv.textContent = character.name;
-                resultDiv.appendChild(characterDiv);
-            }
+            displayResult(name1, selectedCharacters[0], resultDiv);
+            displayResult(name2, selectedCharacters[1], resultDiv);
+            displayResult(name3, selectedCharacters[2], resultDiv);
         }
 
         function getRandomCharacters(selectedCategory) {
@@ -85,6 +97,13 @@
 
             const shuffledCharacters = filteredCharacters.sort(() => 0.5 - Math.random());
             return shuffledCharacters.slice(0, 3);
+        }
+
+        function displayResult(name, character, resultDiv) {
+            const characterDiv = document.createElement("div");
+            characterDiv.className = "character";
+            characterDiv.textContent = `${name}さん:「${character.name}」`;
+            resultDiv.appendChild(characterDiv);
         }
     </script>
 </body>
