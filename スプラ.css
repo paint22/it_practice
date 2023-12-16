@@ -2,6 +2,46 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
 }
+
+h1 {
+    color: #544949;
+    font-size: 40px;
+}
+
+p {
+    color: #000000;
+    font-size: 30px; 
+}
+
+textarea {
+    width: 400px; /* 幅を200pxに設定 */
+    height: 200px; /* 高さを30pxに設定 */
+    font-size: 30px; /* フォントサイズ*/
+}
+
+select{
+    width: 400px; /* 幅を200pxに設定 */
+    height: 40px; /* 高さを30pxに設定 */
+    font-size: 25px; /* フォントサイズ*/
+}
+
+button{
+    width: 300px; /* 幅を200pxに設定 */
+    height: 40px; /* 高さを30pxに設定 */
+    font-size: 30px; /* フォントサイズ*/
+}
+
+div {
+    color: #544949;
+    font-size: 20px;
+}
+
+input {
+    width: 300px; /* 幅を200pxに設定 */
+    height: 40px; /* 高さを30pxに設定 */
+    font-size: 30px; /* フォントサイズ*/
+}
+
 .result-container {
     display: block;
     margin: 10px auto;
