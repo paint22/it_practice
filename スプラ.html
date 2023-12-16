@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1>名前と武器の割り当て</h1>
-    <p>名前を入力してください（最大10人、改行で区切ってください）：</p>
+    <p>名前を入力してください（最大10人、改行で区切ってください）</p>
     <textarea id="nameInput" rows="4" placeholder="名前1&#10;名前2&#10;名前3&#10;..."></textarea>
     <br>
-    <p>カテゴリーを選択してください：</p>
+    <p>カテゴリーを選択してください</p>
     <select id="categorySelect">
         <option value="all">全てのカテゴリー</option>
         <option value="シューター">シューター</option>
@@ -29,10 +29,11 @@
     <br>
     <button onclick="randomAssignWeapons()">ランダムに割り当て</button>
     <div id="result" class="result-container"></div>
-    <p>Discord Webhook URLを入力してください：</p>
+    <p>Discord Webhook URLを入力してください</p>
     <input type="text" id="webhookUrlInput" placeholder="Webhook URL">
     <br>
     <button onclick="sendToDiscord()">Discordに送信</button>
     <script src="スプラ.js"></script>
 </body>
 </html>
+    
